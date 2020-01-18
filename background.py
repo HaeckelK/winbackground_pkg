@@ -54,10 +54,8 @@ class Background():
         file : str
             Full file path (not relative) to image file.
         """
-        """
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
                                                    file, 0)
-        """
         print('original called')
         return
 
