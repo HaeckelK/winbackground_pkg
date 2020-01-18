@@ -1,8 +1,10 @@
 import pytest
 import os
 
+
 from context import background
 from background import Background
+
 
 def mock_change_background(self, file):
     print('mock_change_background')
@@ -15,6 +17,7 @@ def PatchBackground(monkeypatch):
                         mock_change_background)
     bk = Background()
     return bk
+
 
 @pytest.mark.parametrize('file, expected', [
     ('', False),
@@ -32,6 +35,7 @@ def test_check_file_str_path(file, expected, PatchBackground):
     bk = PatchBackground
     result = bk._check_file(file)
     assert result == expected
+
 
 @pytest.mark.parametrize('file, expected', [
     ('', False),

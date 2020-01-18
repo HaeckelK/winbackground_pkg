@@ -3,9 +3,8 @@ import os
 from random import randrange
 
 
-# IMAGE_FOLDER = config.OUTPUT_FOLDER
-
 SPI_SETDESKWALLPAPER = 20
+
 
 class Background():
     def __init__(self):
@@ -15,7 +14,6 @@ class Background():
     def change(self, file):
         """
         Change desktop wallpaper to image located at file.
-        
         Parameters
         ----------
         file : str
@@ -23,10 +21,9 @@ class Background():
         """
 
         # TODO : insist on type of image
-        
         # Check that file exists and is absolute path
         check_passed = self._check_file(file)
-        if check_passed == False:
+        if check_passed is False:
             return False
 
         self._change_background(file)
@@ -59,6 +56,7 @@ class Background():
         print('original called')
         return
 
+
 def change_function(file):
     """
     Parameters
@@ -72,10 +70,3 @@ def change_function(file):
     if not result:
         print('File doesnt exist')
     return result
-
-def main():
-    photos = os.listdir(IMAGE_FOLDER)
-    photos = [os.path.join(IMAGE_FOLDER, photo) for photo in photos]
-    file = photos[randrange(len(photos))]
-    
-    return
