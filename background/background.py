@@ -21,7 +21,6 @@ class Background():
             Full file path (not relative) to image file.
         """
 
-        # TODO : insist on type of image
         # Check that file exists and is absolute path
         check_passed = self._check_file(file)
         if check_passed is False:
@@ -34,6 +33,7 @@ class Background():
         """
         Change desktop wallpaper to an image selected at random from files
         in folder.
+        
         Parameters
         ----------
         folder : str
@@ -41,19 +41,31 @@ class Background():
         """
 
         # Get files in folder
-        files = utils.files_in_folder(folder)
-        # Select random
-        file = choice(files)
-        assert file.lower().endswith('.jpg')
-        # TODO : does this hold up?
-        if os.path.isabs(folder) is False:
-            print('Folder provided is a relative path', folder)
-            folder = os.path.join(os.getcwd(), folder)
-            print('Folder changed to ', folder)
-            
-        # Run change background
-        selection = os.path.join(folder, file)
+        files = utils.files_in_folder(folder, join_folder=True)
+        # Select random from list and change background
+        self.random_from_list(files)
+        return
+
+    def random_from_list(self, files):
+        """
+        Change desktop wallpaper to an image selected at random from list of
+        files.
         
+        Parameters
+        ----------
+        files : list
+            List of str full file paths to images files.
+        """
+
+        temp = []
+        for file in files:
+            output = ''
+            if file.lower().endswith('.jpg') is False:
+                continue
+            if os.path.isabs(file) is False:
+                output = os.path.join(os.getcwd(), file)
+            temp.append(output)
+        selection = choice(temp)
         self.change(selection)
         return
 
@@ -69,6 +81,8 @@ class Background():
         if os.path.isabs(file) is False:
             print('file path must be absolute not relative', file)
             return False
+
+        assert file.lower().endswith('.jpg')
 
         return True
 
