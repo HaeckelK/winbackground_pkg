@@ -4,7 +4,7 @@ Basic functions to change Windows wallpaper.
 
 ## Installation
 
-stop_and_search_api is not yet a package and cannot be installed via pip. Instead the repository may be cloned.
+winbackground_pkg is not yet on pip so cannot be installed via pip. Instead the repository may be cloned.
 
 ```bash
 git clone https://github.com/HaeckelK/winbackground_pkg.git
