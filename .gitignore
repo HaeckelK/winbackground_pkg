@@ -1,6 +1,7 @@
 __pycache__/
 testing
 testing.py
+testing.html
 dist/
 build/
 *.egg-info/
