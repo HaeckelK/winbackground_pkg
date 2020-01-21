@@ -22,6 +22,9 @@ class Background():
             Full file path (not relative) to image file.
         """
 
+        if os.path.isabs(file) is False:
+            file = str(os.path.join(os.getcwd(), file))
+
         # Check that file exists and is absolute path
         check_passed = self._check_file(file)
         if check_passed is False:
@@ -113,8 +116,8 @@ class Background():
             Full file path (not relative) to image file.
         """
         self._print('\nChanging background...', end='')
-        #ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
-         #                                          file, 3)
+        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
+                                                   file, 3)
         self._print('DONE')
         print('original called')
         return
