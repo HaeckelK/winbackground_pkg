@@ -119,7 +119,7 @@ class Background():
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
                                                    file, 3)
         self._print('DONE')
-        print('original called')
+        # print('original called')
         return
 
     def _print(self, *args, **kwargs):
