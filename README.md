@@ -15,14 +15,14 @@ Windows 10
 
 ## Usage
 
-Assuming you have a folder called wallpapers with files test_image1.jpg to test_image4.jpg.
+Assuming you have a folder called C:\\wallpapers with files test_image1.jpg to test_image4.jpg.
 
 Choose background at random from files in a folder:
 ```python
 from background.background import Background
 
 bk = Background()
-bk.change('wallpapers\\test_image.jpg')
+bk.change('C:\\wallpapers\\test_image.jpg')
 ```
 
 Choose background at random from files in a folder:
@@ -30,7 +30,7 @@ Choose background at random from files in a folder:
 from background.background import Background
 
 bk = Background()
-bk.random_from_folder('wallpapers')
+bk.random_from_folder('C:\\wallpapers')
 ```
 
 Choose background at random from files in a list:
@@ -38,8 +38,8 @@ Choose background at random from files in a list:
 from background.background import Background
 
 bk = Background()
-files = ['wallpapers\\test_image.jpg', 'wallpapers\\test_image2.jpg',
-         'wallpapers\\test_image3.jpg', 'wallpapers\\test_image4.jpg']
+files = ['C:\\wallpapers\\test_image.jpg', 'C:\\wallpapers\\test_image2.jpg',
+         'C:\\wallpapers\\test_image3.jpg', 'C:\\wallpapers\\test_image4.jpg']
         
 bk.random_from_list(files)
 ```
@@ -50,7 +50,7 @@ from background.background import Background
 
 bk = Background()
 bk.verbose = False
-bk.change('wallpapers\\test_image4.jpg')
+bk.change('C:\\wallpapers\\test_image4.jpg')
 ```
 
 ## Contributing
