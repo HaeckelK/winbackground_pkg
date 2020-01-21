@@ -10,6 +10,7 @@ SPI_SETDESKWALLPAPER = 20
 class Background():
     def __init__(self):
         self.filetypes = ['jpg']
+        self.verbose = True
         return
 
     def change(self, file):
@@ -39,9 +40,14 @@ class Background():
         folder : str
             Full path to folder (not relative) to image file.
         """
-
+        self._print('\nSelecting random file from folder:')
+        self._print(folder)
+        
         # Get files in folder
         files = utils.files_in_folder(folder, join_folder=True)
+
+        self._print('Files found: ', len(files))
+        
         # Select random from list and change background
         self.random_from_list(files)
         return
@@ -56,7 +62,9 @@ class Background():
         files : list
             List of str full file paths to images files.
         """
-
+        self._print('\nSelecting random file from list:')
+        self._print('Files in list: ', len(files))
+        
         temp = []
         for file in files:
             output = ''
@@ -65,25 +73,36 @@ class Background():
             if os.path.isabs(file) is False:
                 output = os.path.join(os.getcwd(), file)
             temp.append(output)
+        assert temp
+        
         selection = choice(temp)
+        self._print('File selected: ', os.path.basename(selection))
         self.change(selection)
         return
 
     def _check_file(self, file):
+        self._print('\nFile checks')
+        
         if not isinstance(file, str):
             print('file must be a string')
             return False
+        else:
+            self._print('File is string')
 
         if os.path.isfile(file) is False:
             print('file does not exist', file)
             return False
+        else:
+            self._print('File exists')
 
         if os.path.isabs(file) is False:
             print('file path must be absolute not relative', file)
             return False
+        else:
+            self._print('File path is absolute')
 
         assert file.lower().endswith('.jpg')
-
+        
         return True
 
     def _change_background(self, file):
@@ -93,7 +112,14 @@ class Background():
         file : str
             Full file path (not relative) to image file.
         """
-        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
-                                                   file, 3)
+        self._print('\nChanging background...', end='')
+        #ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
+         #                                          file, 3)
+        self._print('DONE')
         print('original called')
+        return
+
+    def _print(self, *args, **kwargs):
+        if self.verbose == True:
+            print(*args, **kwargs)
         return
