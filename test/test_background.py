@@ -3,7 +3,7 @@ import os
 
 
 from context import background
-from background import Background
+from background.background import Background
 
 
 def mock_change_background(self, file):
