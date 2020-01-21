@@ -1,7 +1,8 @@
 import ctypes
 import os
-from random import randrange
+from random import choice
 
+from . import utils
 
 SPI_SETDESKWALLPAPER = 20
 
@@ -29,6 +30,33 @@ class Background():
         self._change_background(file)
         return True
 
+    def random_from_folder(self, folder):
+        """
+        Change desktop wallpaper to an image selected at random from files
+        in folder.
+        Parameters
+        ----------
+        folder : str
+            Full path to folder (not relative) to image file.
+        """
+
+        # Get files in folder
+        files = utils.files_in_folder(folder)
+        # Select random
+        file = choice(files)
+        assert file.lower().endswith('.jpg')
+        # TODO : does this hold up?
+        if os.path.isabs(folder) is False:
+            print('Folder provided is a relative path', folder)
+            folder = os.path.join(os.getcwd(), folder)
+            print('Folder changed to ', folder)
+            
+        # Run change background
+        selection = os.path.join(folder, file)
+        
+        self.change(selection)
+        return
+
     def _check_file(self, file):
         if not isinstance(file, str):
             print('file must be a string')
@@ -55,18 +83,3 @@ class Background():
                                                    file, 3)
         print('original called')
         return
-
-
-def change_function(file):
-    """
-    Parameters
-    ----------
-    file : str
-        Full file path (not relative) to image file.
-    """
-    # TODO File must be full file path?
-    result = ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER,
-                                                        0, file, 0)
-    if not result:
-        print('File doesnt exist')
-    return result

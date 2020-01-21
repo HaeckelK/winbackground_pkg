@@ -2,6 +2,7 @@
 Helper functions
 """
 import os
+from os.path import join
 
 def files_in_folder(folder):
     """
