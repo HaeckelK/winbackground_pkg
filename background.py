@@ -52,7 +52,7 @@ class Background():
             Full file path (not relative) to image file.
         """
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0,
-                                                   file, 0)
+                                                   file, 3)
         print('original called')
         return
 
